@@ -1,27 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\StoreRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
-class StoreController extends Controller
+class IndexController extends Controller
 {
 
-    /**
-     * @param StoreRequest $request
-     * @return mixed
-     */
-    public function index(StoreRequest $request)
+    public function index()
     {
-        $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        User::firstOrCreate([
-            'email' => $data['email']
-        ], $data);
-        return response([]);
+        return response("The owls are not what they seem");
     }
 
 }

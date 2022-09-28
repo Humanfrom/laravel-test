@@ -1,15 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\User\StoreRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class StoreController extends Controller
 {
 
-    public function index()
+    /**
+     * @param StoreRequest $request
+     * @return mixed
+     */
+    public function index(StoreRequest $request)
     {
-        return response()->json(data: '1111');
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+        User::firstOrCreate([
+            'email' => $data['email']
+        ], $data);
+        return response([]);
     }
+
 }
